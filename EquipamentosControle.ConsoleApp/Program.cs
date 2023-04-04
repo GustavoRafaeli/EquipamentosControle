@@ -10,7 +10,7 @@ class Program
     static ArrayList fabricantes = new ArrayList();
     static ArrayList datasDeFabricacao = new ArrayList();
 
-    static int contadorIdEquipamento = 0;
+
 
     static ArrayList titulos = new ArrayList();
     static ArrayList descricoesChamados = new ArrayList();
@@ -18,13 +18,13 @@ class Program
     static ArrayList dataDeAbertura = new ArrayList();
     static ArrayList idChamados = new ArrayList();
 
+
+    static int contadorIdEquipamento = 0;
     static int contadorIdchamados = 0;
 
 
     static int opcaoMenus = 0;
 
-    static int contadorDeExclusaoChamado = 0;
-    static int contadorDeExclusaoEquipamento = 0;
 
     static void Main()
     {
@@ -86,6 +86,8 @@ class Program
         idChamados.Add(3);
         //----------------------------------------------------------------
 
+        contadorIdEquipamento = idsEquipamentos.Count;
+        contadorIdchamados = idChamados.Count;
 
         while (opcaoMenus != 3)
         {
@@ -195,7 +197,8 @@ class Program
         Console.WriteLine("Digite o ID do equipamento que deseja excluir: ");
         int idParaExcluir = int.Parse(Console.ReadLine());
 
-        while (idParaExcluir > idsEquipamentos.Count || idParaExcluir < 0)
+
+        while (idsEquipamentos.Contains(idParaExcluir) == false)
         {
             Console.WriteLine("Equipamento não existe!");
             Console.WriteLine();
@@ -203,12 +206,15 @@ class Program
             idParaExcluir = int.Parse(Console.ReadLine());
         }
 
-        nomes.RemoveAt(idParaExcluir);
-        precos.RemoveAt(idParaExcluir);
-        idsEquipamentos.RemoveAt(idParaExcluir);
-        numerosDeSerie.RemoveAt(idParaExcluir);
-        fabricantes.RemoveAt(idParaExcluir);
-        datasDeFabricacao.RemoveAt(idParaExcluir);
+
+        int posicao = idsEquipamentos.IndexOf(idParaExcluir);
+
+        nomes.RemoveAt(posicao);
+        precos.RemoveAt(posicao);
+        idsEquipamentos.RemoveAt(posicao);
+        numerosDeSerie.RemoveAt(posicao);
+        fabricantes.RemoveAt(posicao);
+        datasDeFabricacao.RemoveAt(posicao);
 
 
         Console.ForegroundColor = ConsoleColor.Green;
@@ -280,11 +286,11 @@ class Program
         Console.WriteLine("Qual equipamento você deseja editar? (determine o ID) ");
         int id = int.Parse(Console.ReadLine());
 
-        while (id > idsEquipamentos.Count || id < 0)
+        while (idsEquipamentos.Contains(id) == false)
         {
             Console.WriteLine("Este ID não existe, digite um ID existente: ");
             id = int.Parse(Console.ReadLine());
-        }
+        } 
 
         Console.WriteLine("Digite o novo nome do equipamento: ");
         string novoNome = Console.ReadLine();
@@ -297,12 +303,13 @@ class Program
         Console.WriteLine("Digite o novo fabricante do equipamento: ");
         string novoFabricante = Console.ReadLine();
 
+        int posicao = idsEquipamentos.IndexOf(id);
 
-        nomes[id] = novoNome;
-        precos[id] = novoPreco;
-        numerosDeSerie[id] = novoNumeroSerie;
-        fabricantes[id] = novoFabricante;
-        datasDeFabricacao[id] = novaDataFabricacao;
+        nomes[posicao] = novoNome;
+        precos[posicao] = novoPreco;
+        numerosDeSerie[posicao] = novoNumeroSerie;
+        fabricantes[posicao] = novoFabricante;
+        datasDeFabricacao[posicao] = novaDataFabricacao;
 
         Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine("-------------------------------------");
@@ -359,13 +366,13 @@ class Program
     private static void EditarChamado(ArrayList titulos, ArrayList descricoesChamados, ArrayList equipamentos, ArrayList dataDeAbertura, ArrayList idChamados)
     {
         Console.WriteLine("Qual chamado você deseja editar? (determine o ID) ");
-        int id = int.Parse(Console.ReadLine());
+        int idEditar = int.Parse(Console.ReadLine());
 
-        while(id > idChamados.Count || id < 0)
+        while (idChamados.Contains(idEditar) == false)
         {
             Console.WriteLine("Este ID não existe, digite um ID existente: ");
-            id = int.Parse(Console.ReadLine());
-        }
+            idEditar = int.Parse(Console.ReadLine());
+        } 
 
         Console.WriteLine("Digite o novo título do chamado: ");
         string novotitulo = Console.ReadLine();
@@ -377,10 +384,12 @@ class Program
         string novaDataAbertura = Console.ReadLine();
 
 
-        titulos[id] = novotitulo;
-        descricoesChamados[id] = novaDescricao;
-        equipamentos[id] = equipamento;
-        dataDeAbertura[id] = novaDataAbertura;
+        int posicao = idChamados.IndexOf(idEditar);
+
+        titulos[posicao] = novotitulo;
+        descricoesChamados[posicao] = novaDescricao;
+        equipamentos[posicao] = equipamento;
+        dataDeAbertura[posicao] = novaDataAbertura;
 
 
         Console.ForegroundColor = ConsoleColor.Green;
@@ -394,7 +403,7 @@ class Program
         Console.WriteLine("Digite o ID do chamado que deseja excluir: ");
         int idParaExcluir = int.Parse(Console.ReadLine());
 
-        while (idParaExcluir > idChamados.Count || idParaExcluir < 0)
+        while (idChamados.Contains(idParaExcluir) == false)
         {
             Console.WriteLine("Chamado não existe!");
             Console.WriteLine();
@@ -402,11 +411,14 @@ class Program
             idParaExcluir = int.Parse(Console.ReadLine());
         }
 
-        titulos.RemoveAt(idParaExcluir);
-        descricoesChamados.RemoveAt(idParaExcluir);
-        equipamentos.RemoveAt(idParaExcluir);
-        dataDeAbertura.RemoveAt(idParaExcluir);
-        idChamados.RemoveAt(idParaExcluir);
+
+        int posicao = idChamados.IndexOf(idParaExcluir);
+
+        titulos.RemoveAt(posicao);
+        descricoesChamados.RemoveAt(posicao);
+        equipamentos.RemoveAt(posicao);
+        dataDeAbertura.RemoveAt(posicao);
+        idChamados.RemoveAt(posicao);
 
         Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine("-------------------------------");
