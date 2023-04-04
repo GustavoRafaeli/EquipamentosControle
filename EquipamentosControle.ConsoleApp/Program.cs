@@ -358,8 +358,12 @@ class Program
 
         for (int i = 0; i < idChamados.Count; i++)
         {
+
             int posicaoIdEquipamento = (int)equipamentos[i];
-            Console.WriteLine("{0,-3}|{1,-24}|{2,-13}|{3,-26}|", idChamados[i], titulos[i], nomes[posicaoIdEquipamento], dataDeAbertura[i]);
+
+            int nomeEquipamento = (int)equipamentos.IndexOf(posicaoIdEquipamento);
+
+            Console.WriteLine("{0,-3}|{1,-24}|{2,-13}|{3,-26}|", idChamados[i], titulos[i], nomes[nomeEquipamento], dataDeAbertura[i]);
         }
     }
 
